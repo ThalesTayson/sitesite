@@ -93,7 +93,7 @@ a {
     margin-left: 30%;
     width: 40%;
 }
-button {
+.btn-agendar {
     width: 130px;
     height: 30px;
     font-size: 11px;
@@ -102,6 +102,13 @@ button {
     color: white;
     background-color: red;
     cursor: pointer;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 6px;
+    border-style: inset;
+    display: block;
+    align-items: center;
+    margin: auto;
 }
 h4{
     color: darkgray;
@@ -118,4 +125,7 @@ h3 {
 }
 .icone a{
     color: white;
+}
+main{
+    text-align: center;
 }

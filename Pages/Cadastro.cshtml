@@ -1,0 +1,13 @@
+@page
+@model CadastroModel
+@{
+    ViewData["Title"] = "Cadastro";
+    ViewData["Data"] = DateTime.Now;
+}
+<h1>@ViewData["Title"]</h1>
+<p>@ViewData["Data"]</p>
+<form method="post">
+    <input type="text" name="nome" placeholder="Your Name">
+    <input type="submit" value="Up">
+</form>
+<p>@Model.Message</p>
