@@ -1,0 +1,45 @@
+@page
+@model sitesite.Pages.Clientes.edit
+@{
+    ViewData["Title"] = "Editar Clientes";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="POST"> 
+    <input type="hidden" name="id" />
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nome</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="name"  />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">E-mail</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="email"  />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Fone</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="phone" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Endereço</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="adress"  />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Alterar</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">Cancela</a>
+        </div>
+    </div>
+</form>
