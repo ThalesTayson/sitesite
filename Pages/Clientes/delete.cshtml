@@ -7,5 +7,9 @@
 <h1>@ViewData["Title"]</h1>
 
 <div>
-    
+    <h2>Confirma a exclusão do cliente @Model.nomeCliente?<h2>
+    <form method="post">
+        <input class='btn btn-primary' type="submit" value="Confirmar">
+        <a class='btn btn-danger' href="/Clientes">Cancelar</a>
+    </form>
 </div>

@@ -1,162 +1,173 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Common;
-using System.Data;
 using Microsoft.Data.SqlClient;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace sitesite.DAL
 {
-    public class DataAccess
+
+    public class cnx_BD
     {
         #region Objetos Estáticos
-        // Objeto Connection para obter acesso ao SQL Server
-        public static SqlConnection sqlconnection = new SqlConnection();
-        // Objeto SqlCommand para executar os com
-        public static SqlCommand comando = new SqlCommand();
-        // Objeto SqlParameter para adicionar os parâmetros
-        //necessários em nossas consultas
-        public static SqlParameter parametro = new SqlParameter();
+        private static IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile("appsettings.json", false, true);
+
+        private static IConfigurationRoot configuration = builder.Build();
+
+        private string strconn = configuration.GetConnectionString("DefaultConnection");
+
         #endregion
 
-        #region Obter SqlConnection
-        public static SqlConnection connection()
+        public class objCliente
         {
+            public int id;
+            public string nome, email, fone, endereco ;
+
+            public objCliente(int id, string nome, string email, string fone, string endereco)
+            {
+                this.id = id;
+                this.nome = nome;
+                this.email = email;
+                this.fone = fone;
+                this.endereco = endereco;
+            }
+        }
+        public string insertCliente(string nome, string email, string fone, string endereco)
+        {
+            SqlConnection conexao = new SqlConnection(strconn);
+
+            SqlCommand cmd = new SqlCommand(@$"
+                INSERT INTO dbo.cliente (nome, email, fone, endereco)
+                VALUES ('{nome}', '{email}', '{fone}', '{endereco}');
+            ", conexao);
+
             try
             {
-                // Obtemos os dados da conexão existentes no WebConfig
-                //string dadosConexao = ConfigurationManager
-                //.ConnectionStrings["NomeDaConnectionString"].ConnectionString;
-                // Instanciando o objeto SqlConnection
-                sqlconnection = new SqlConnection("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;");
-                //Verifica se a conexão esta fechada.
-                if (sqlconnection.State == ConnectionState.Closed)
+                conexao.Open();
+                cmd.ExecuteNonQuery();
+                return  $"Cadastro realizado com sucesso, { DateTime.Now }";
+            }
+            catch (System.Exception)
+            {
+                return $"Desculpa, Ocorreu um erro inesperado";
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
+        public List<objCliente> listCliente()
+        {
+            SqlConnection conexao = new SqlConnection(strconn);
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.cliente", conexao);
+
+            List<objCliente> listaClientes = new List<objCliente>();
+
+            try
+            {
+                conexao.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
                 {
-                    //Abre a conexão.
-                    sqlconnection.Open();
+                    listaClientes.Add(new objCliente(int.Parse(reader[0].ToString()), 
+                        reader[1].ToString(), reader[2].ToString(), 
+                        reader[3].ToString(), reader[4].ToString()
+                    ));
                 }
-                //Retorna o sqlconnection.
-                return sqlconnection;
+                reader.Close();
+                return listaClientes;
             }
-            catch (SqlException ex)
+            catch (System.Exception)
             {
-                throw ex;
+                Console.WriteLine("Desculpa, Ocorreu um erro inesperado");
+                return listaClientes;
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
-        #endregion
-
-        #region Abre Conexão
-        public void Open()
+        public string deleteCliente(int id)
         {
-            sqlconnection.Open();
-        }
-        #endregion
+            SqlConnection conexao = new SqlConnection(strconn);
 
-        #region Fecha Conexão
-        public void Close()
-        {
-            sqlconnection.Close();
-        }
-        #endregion
+            SqlCommand cmd = new SqlCommand($"DELETE FROM dbo.cliente WHERE id = {id};", conexao);
 
-        #region Adiciona Parâmetros
-        public void AdicionarParametro(string nome,
-        SqlDbType tipo, int tamanho, object valor)
-        {
-            // Cria a instância do Parâmetro e adiciona os valores
-            parametro = new SqlParameter();
-            parametro.ParameterName = nome;
-            parametro.SqlDbType = tipo;
-            parametro.Size = tamanho;
-            parametro.Value = valor;
-            // Adiciona ao comando SQL o parâmetro
-            comando.Parameters.Add(parametro);
-        }
-        #endregion
-
-        #region Adiciona Parâmetros
-        public void AdicionarParametro(string nome, SqlDbType tipo, object valor)
-        {
-            // Cria a instância do Parâmetro e adiciona os valores
-            SqlParameter parametro = new SqlParameter();
-            parametro.ParameterName = nome;
-            parametro.SqlDbType = tipo;
-            parametro.Value = valor;
-            // Adiciona ao comando SQL o parâmetro
-            comando.Parameters.Add(parametro);
-        }
-        #endregion
-
-        #region Remove os parâmetros
-        public void RemoverParametro(string pNome)
-        {
-            // Verifica se existe o parâmetro
-            if (comando.Parameters.Contains(pNome))
-                // Se exite remove o mesmo
-                comando.Parameters.Remove(pNome);
-        }
-        #endregion
-
-        #region Limpar Parâmetros
-        public void LimparParametros()
-        {
-            comando.Parameters.Clear();
-        }
-        #endregion
-
-        #region Executar Consulta SQL
-        public DataTable ExecutaConsulta(string sql)
-        {
             try
             {
-                // Pega conexão com a base SQL Server
-                comando.Connection = connection();
-                // Adiciona a instrução SQL
-                comando.CommandText = sql;
-                //Executa a query sql.
-                comando.ExecuteScalar();
-                // Ler os dados e passa para um DataTable
-                IDataReader dtreader = comando.ExecuteReader();
-                DataTable dtresult = new DataTable();
-                dtresult.Load(dtreader);
-                // Fecha a conexão
-                sqlconnection.Close();
-                // Retorna o DataTable com os dados da consulta
-                return dtresult;
+                conexao.Open();
+                cmd.ExecuteNonQuery();
+                return "Cliente deletado com sucesso";
             }
-            catch (Exception ex)
+            catch (System.Exception)
             {
-              // Retorna uma exceção simples que pode ser tratada por parte do desenvolvedor
-              // Exemplo: if (ex.Message.toString().Contains(‘Networkig’))
-              // Exemplo throw new Exception(‘Problema de rede detectado’);
-                throw ex;
+                return "Desculpa, Ocorreu um erro inesperado";
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
-        #endregion
-
-        #region Executa uma instrução SQL: INSERT, UPDATE e DELETE
-        public int ExecutaAtualizacao(string sql)
+        public string editCliente(int id, string nome, string email, string fone, string endereco)
         {
+            SqlConnection conexao = new SqlConnection(strconn);
+
+            SqlCommand cmd = new SqlCommand(@$"
+                UPDATE dbo.cliente
+                SET nome = {nome}, email = {email}, fone = {fone}, endereco = {endereco}
+                WHERE id = {id};
+            ", conexao);
+
             try
             {
-                //Instância o sqlcommand com a query sql que será executada e a conexão.
-                //comando = new SqlCommand(sql, connection());
-                comando.Connection = connection();
-                comando.CommandText = sql;
-                //Executa a query sql.
-                int result = comando.ExecuteNonQuery();
-                sqlconnection.Close();
-                // Retorna a quantidade de linhas afetadas
-                return result;
+                conexao.Open();
+                cmd.ExecuteNonQuery();
+                return  $"Alterações de cadastro realizadas, { DateTime.Now }";
             }
-            catch (Exception ex)
+            catch (System.Exception)
             {
-                // Retorna uma exceção simples que pode ser tratada por parte do desenvolvedor
-                throw ex;
+                return "Desculpa, Ocorreu um erro inesperado";
+            }
+            finally
+            {
+                conexao.Close();
             }
         }
-        #endregion
+        public objCliente getCliente(int id)
+        {
+            SqlConnection conexao = new SqlConnection(strconn);
+
+            SqlCommand cmd = new SqlCommand(@$"
+                SELECT FROM dbo.cliente
+                WHERE id = {id};
+            ", conexao);
+            try
+            {
+                conexao.Open();
+                
+                SqlDataReader reader = cmd.ExecuteReader();
+                
+                if (reader.Read())
+                {
+                    objCliente cliente =  new objCliente(int.Parse(reader[0].ToString()), 
+                        reader[1].ToString(), reader[2].ToString(), 
+                        reader[3].ToString(), reader[4].ToString()
+                    );
+                    reader.Close();
+                    return cliente;
+                } else
+                {
+                    reader.Close();
+                    return null;
+                }
+                
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                conexao.Close();
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using sitesite.DAL;
 
 namespace sitesite.Pages.Clientes
 {
@@ -12,6 +13,8 @@ namespace sitesite.Pages.Clientes
     {
         private readonly ILogger<edit> _logger;
 
+        public static cnx_BD db = new cnx_BD();
+        
         public edit(ILogger<edit> logger)
         {
             _logger = logger;
@@ -19,6 +22,7 @@ namespace sitesite.Pages.Clientes
 
         public void OnGet()
         {
+            cnx_BD.objCliente cliente = db.getCliente(int.Parse(Request.Query["id"]));
         }
     }
 }

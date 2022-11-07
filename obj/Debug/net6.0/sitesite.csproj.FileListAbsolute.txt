@@ -36,7 +36,6 @@ D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.IdentityModel.Pro
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
-D:\Facul\programação web\sitesite\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\System.Drawing.Common.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
@@ -47,13 +46,9 @@ D:\Facul\programação web\sitesite\bin\Debug\net6.0\System.Windows.Extensions.d
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Facul\programação web\sitesite\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
@@ -126,3 +121,10 @@ D:\Facul\programacao-web\sitesite\bin\Debug\net6.0\Microsoft.Identity.Client.Ext
 D:\Facul\programacao-web\sitesite\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 D:\Facul\programacao-web\sitesite\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 D:\Facul\programacao-web\sitesite\bin\Debug\net6.0\System.Memory.Data.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\Azure.Core.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\Azure.Identity.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+D:\Facul\programação web\sitesite\bin\Debug\net6.0\System.Memory.Data.dll
