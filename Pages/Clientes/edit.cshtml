@@ -1,36 +1,35 @@
 @page
 @model sitesite.Pages.Clientes.edit
 @{
-    ViewData["Title"] = "Editar Clientes";
+    ViewData["Title"] = "Atualizando cadastro de cliente";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-
 <form method="POST"> 
-    <input type="hidden" name="id" />
+    <input type="hidden" name="id" value="@Model.cliente.Id" />
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Nome</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="name" value=""  />
+            <input type="text" class="form-control" name="name" value="@Model.cliente.Nome" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">E-mail</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="email"  />
+            <input type="text" class="form-control" name="email" value="@Model.cliente.Email" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Fone</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="phone" />
+            <input type="text" class="form-control" name="phone" value="@Model.cliente.Fone" />
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Endereço</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="adress"  />
+            <input type="text" class="form-control" name="adress" value="@Model.cliente.Endereco" />
         </div>
     </div>
 
@@ -39,7 +38,7 @@
             <button type="submit" class="btn btn-primary">Alterar</button>
         </div>
         <div class="col-sm-3 d-grid">
-            <a class="btn btn-outline-primary" href="/" role="button">Cancela</a>
+            <a class="btn btn-outline-primary" href="/Clientes" role="button">Cancela</a>
         </div>
     </div>
 </form>

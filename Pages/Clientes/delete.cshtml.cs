@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using sitesite.DAL;
+using sitesite.objetos;
 
 namespace sitesite.Pages.Clientes
 {
@@ -14,19 +15,20 @@ namespace sitesite.Pages.Clientes
         private readonly ILogger<delete> _logger;
 
         public static cnx_BD db = new cnx_BD();
-        public string nomeCliente = "";
+        public Cliente cliente = new Cliente();
+
         public delete(ILogger<delete> logger)
         {
             _logger = logger;
         }
         public void OnGet()
         {
-            nomeCliente = db.getCliente(int.Parse(Request.Query["id"])).nome;
-
+            cliente = db.getCliente(int.Parse(Request.Query["id"]));
         }
         public IActionResult OnPost()
         {
-            db.deleteCliente(int.Parse(Request.Query["id"]));
+            string Message = db.deleteCliente(int.Parse(Request.Form["id"]));
+            Console.WriteLine(Message);
             return Redirect("/Clientes");
         }
     }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using sitesite.DAL;
+using sitesite.objetos;
 
 namespace sitesite.Pages.Clientes
 {   
@@ -23,21 +24,19 @@ namespace sitesite.Pages.Clientes
         }
         
         public static cnx_BD db = new cnx_BD(); 
-
-        public string Message { get; private set; } = "";
         public void OnGet()
         {
         }
         public IActionResult OnPost()
         {
-
-            string nome = Request.Form["name"];
-            string email = Request.Form["email"];
-            string fone = Request.Form["phone"];
-            string endereco = Request.Form["adress"];
+            Cliente cliente = new Cliente();
+            cliente.Nome = Request.Form["name"];
+            cliente.Email = Request.Form["email"];
+            cliente.Fone = Request.Form["phone"];
+            cliente.Endereco = Request.Form["adress"];
             
-            db.insertCliente(nome, email, fone, endereco);
-
+            string Message = db.insertCliente(cliente);
+            Console.WriteLine(Message);
             return Redirect("/Clientes");
         }   
     }

@@ -1,6 +1,6 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-
+using sitesite.objetos;
 namespace sitesite.DAL
 {
 
@@ -14,28 +14,13 @@ namespace sitesite.DAL
         private string strconn = configuration.GetConnectionString("DefaultConnection");
 
         #endregion
-
-        public class objCliente
-        {
-            public int id;
-            public string nome, email, fone, endereco ;
-
-            public objCliente(int id, string nome, string email, string fone, string endereco)
-            {
-                this.id = id;
-                this.nome = nome;
-                this.email = email;
-                this.fone = fone;
-                this.endereco = endereco;
-            }
-        }
-        public string insertCliente(string nome, string email, string fone, string endereco)
+        public string insertCliente(Cliente cliente)
         {
             SqlConnection conexao = new SqlConnection(strconn);
 
             SqlCommand cmd = new SqlCommand(@$"
                 INSERT INTO dbo.cliente (nome, email, fone, endereco)
-                VALUES ('{nome}', '{email}', '{fone}', '{endereco}');
+                VALUES ('{cliente.Nome}', '{cliente.Email}', '{cliente.Fone}', '{cliente.Endereco}');
             ", conexao);
 
             try
@@ -53,13 +38,13 @@ namespace sitesite.DAL
                 conexao.Close();
             }
         }
-        public List<objCliente> listCliente()
+        public List<Cliente> listCliente()
         {
             SqlConnection conexao = new SqlConnection(strconn);
 
             SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.cliente", conexao);
 
-            List<objCliente> listaClientes = new List<objCliente>();
+            List<Cliente> listaClientes = new List<Cliente>();
 
             try
             {
@@ -67,10 +52,13 @@ namespace sitesite.DAL
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    listaClientes.Add(new objCliente(int.Parse(reader[0].ToString()), 
-                        reader[1].ToString(), reader[2].ToString(), 
-                        reader[3].ToString(), reader[4].ToString()
-                    ));
+                    var cliente = new Cliente();
+                    cliente.Id = int.Parse(reader[0].ToString());
+                    cliente.Nome = reader[1].ToString();
+                    cliente.Email = reader[2].ToString();
+                    cliente.Fone = reader[3].ToString();
+                    cliente.Endereco = reader[4].ToString();
+                    listaClientes.Add(cliente);
                 }
                 reader.Close();
                 return listaClientes;
@@ -95,7 +83,7 @@ namespace sitesite.DAL
             {
                 conexao.Open();
                 cmd.ExecuteNonQuery();
-                return "Cliente deletado com sucesso";
+                return $"Cliente deletado com sucesso, { DateTime.Now }";
             }
             catch (System.Exception)
             {
@@ -106,14 +94,14 @@ namespace sitesite.DAL
                 conexao.Close();
             }
         }
-        public string editCliente(int id, string nome, string email, string fone, string endereco)
+        public string editCliente(Cliente cliente)
         {
             SqlConnection conexao = new SqlConnection(strconn);
 
             SqlCommand cmd = new SqlCommand(@$"
                 UPDATE dbo.cliente
-                SET nome = {nome}, email = {email}, fone = {fone}, endereco = {endereco}
-                WHERE id = {id};
+                SET nome = '{cliente.Nome}', email = '{cliente.Email}', fone = '{cliente.Fone}', endereco = '{cliente.Endereco}'
+                WHERE id = {cliente.Id};
             ", conexao);
 
             try
@@ -131,14 +119,14 @@ namespace sitesite.DAL
                 conexao.Close();
             }
         }
-        public objCliente getCliente(int id)
+        public Cliente getCliente(int id)
         {
             SqlConnection conexao = new SqlConnection(strconn);
 
             SqlCommand cmd = new SqlCommand(@$"
-                SELECT FROM dbo.cliente
+                SELECT * FROM dbo.cliente
                 WHERE id = {id};
-            ", conexao);
+            ", conexao); 
             try
             {
                 conexao.Open();
@@ -147,10 +135,12 @@ namespace sitesite.DAL
                 
                 if (reader.Read())
                 {
-                    objCliente cliente =  new objCliente(int.Parse(reader[0].ToString()), 
-                        reader[1].ToString(), reader[2].ToString(), 
-                        reader[3].ToString(), reader[4].ToString()
-                    );
+                    Cliente cliente =  new Cliente();
+                    cliente.Id = int.Parse(reader[0].ToString());
+                    cliente.Nome = reader[1].ToString();
+                    cliente.Email = reader[2].ToString();
+                    cliente.Fone = reader[3].ToString();
+                    cliente.Endereco = reader[4].ToString();
                     reader.Close();
                     return cliente;
                 } else

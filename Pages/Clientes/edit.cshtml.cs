@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using sitesite.DAL;
-
+using sitesite.objetos;
 namespace sitesite.Pages.Clientes
 {
     public class edit : PageModel
@@ -15,6 +15,7 @@ namespace sitesite.Pages.Clientes
 
         public static cnx_BD db = new cnx_BD();
         
+        public Cliente cliente = new Cliente();
         public edit(ILogger<edit> logger)
         {
             _logger = logger;
@@ -22,7 +23,19 @@ namespace sitesite.Pages.Clientes
 
         public void OnGet()
         {
-            cnx_BD.objCliente cliente = db.getCliente(int.Parse(Request.Query["id"]));
+            cliente = db.getCliente(int.Parse(Request.Query["id"]));
+        }
+        public IActionResult OnPost()
+        {
+            Cliente cliente = new Cliente();
+            cliente.Id = int.Parse(Request.Form["id"]);
+            cliente.Nome = Request.Form["name"];
+            cliente.Email = Request.Form["email"];
+            cliente.Fone = Request.Form["phone"];
+            cliente.Endereco = Request.Form["adress"];
+            string Message = db.editCliente(cliente);
+            Console.WriteLine(Message);
+            return Redirect("/Clientes");
         }
     }
 }
