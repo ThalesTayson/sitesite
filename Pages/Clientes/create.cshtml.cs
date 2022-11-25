@@ -34,9 +34,9 @@ namespace sitesite.Pages.Clientes
             cliente.Email = Request.Form["email"];
             cliente.Fone = Request.Form["phone"];
             cliente.Endereco = Request.Form["adress"];
-            
-            string Message = db.insertCliente(cliente);
-            Console.WriteLine(Message);
+            cliente.save();
+            //string Message = db.insertCliente(cliente);
+            //Console.WriteLine(Message);
             return Redirect("/Clientes");
         }   
     }

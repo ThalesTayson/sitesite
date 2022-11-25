@@ -3190,19 +3190,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tvargas\\.nuget\\packages\\": {}
+    "C:\\Users\\AdminUser\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Facul\\programação web\\sitesite\\sitesite.csproj",
+      "projectUniqueName": "D:\\Facul\\programacao-web\\sitesite\\sitesite.csproj",
       "projectName": "sitesite",
-      "projectPath": "D:\\Facul\\programação web\\sitesite\\sitesite.csproj",
-      "packagesPath": "C:\\Users\\tvargas\\.nuget\\packages\\",
-      "outputPath": "D:\\Facul\\programação web\\sitesite\\obj\\",
+      "projectPath": "D:\\Facul\\programacao-web\\sitesite\\sitesite.csproj",
+      "packagesPath": "C:\\Users\\AdminUser\\.nuget\\packages\\",
+      "outputPath": "D:\\Facul\\programacao-web\\sitesite\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tvargas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\AdminUser\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -3254,7 +3254,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

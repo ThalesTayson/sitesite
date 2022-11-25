@@ -15,7 +15,7 @@ namespace sitesite.Pages.Clientes
         private readonly ILogger<index> _logger;
 
         public static cnx_BD db = new cnx_BD();
-        public List<Cliente> clientes = db.listCliente();
+        public ObjClientes clientes = new ObjClientes();
 
         public index(ILogger<index> logger)
         {
