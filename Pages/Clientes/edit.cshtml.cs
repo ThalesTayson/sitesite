@@ -11,8 +11,6 @@ namespace sitesite.Pages.Clientes
     public class edit : PageModel
     {
         private readonly ILogger<edit> _logger;
-
-        public static cnx_BD db = new cnx_BD();
         
         public Cliente cliente = new Cliente();
         public edit(ILogger<edit> logger)
@@ -22,18 +20,18 @@ namespace sitesite.Pages.Clientes
 
         public void OnGet()
         {
-            cliente = db.getCliente(int.Parse(Request.Query["id"]));
+            cliente.get(int.Parse(Request.Query["id"]));
         }
         public IActionResult OnPost()
         {
-            Cliente cliente = new Cliente();
-            cliente.Id = int.Parse(Request.Form["id"]);
+            cliente.get(int.Parse(Request.Form["id"]));
             cliente.Nome = Request.Form["name"];
             cliente.Email = Request.Form["email"];
             cliente.Fone = Request.Form["phone"];
             cliente.Endereco = Request.Form["adress"];
-            string Message = db.editCliente(cliente);
-            Console.WriteLine(Message);
+
+            cliente.save();
+            
             return Redirect("/Clientes");
         }
     }

@@ -24,7 +24,6 @@ namespace sitesite.Pages.Clientes
 
         public void OnGet()
         {
-            
         }
     }
 }

@@ -21,13 +21,13 @@ namespace sitesite.Pages.Clientes
         }
         public void OnGet()
         {
-            cliente
-            cliente = db.getCliente(int.Parse(Request.Query["id"]));
+            cliente.get(int.Parse(Request.Query["id"]));
         }
         public IActionResult OnPost()
         {
-            string Message = db.deleteCliente(int.Parse(Request.Form["id"]));
-            Console.WriteLine(Message);
+            cliente.get(int.Parse(Request.Form["id"]));
+            cliente.delete();
+            
             return Redirect("/Clientes");
         }
     }

@@ -18,10 +18,10 @@ namespace sitesite.objetos
                 cli.Email = list[itemId]["email"];
                 cli.Endereco = list[itemId]["endereco"];
                 cli.Fone = list[itemId]["fone"];
-                Console.WriteLine(cli.Nome);
                 this.Add(cli);
             }
         }
+
 
     }
     
@@ -63,16 +63,60 @@ namespace sitesite.objetos
 
         public void save(){
             cnx_BD database = new cnx_BD();
+            if (this.id != 0){
+                string resp = database.update(this.name_table, this.id, new Dictionary<String, object>{
+                    { "nome", this.nome }, { "email", this.email },
+                    { "fone", this.fone }, { "endereco", this.endereco },
+                });
 
-            Console.WriteLine(database.insert(this.name_table , new Dictionary<String, object>{
-                { "nome", this.nome }, { "email", this.email },
-                { "fone", this.fone }, { "endereco", this.endereco },
-            }));
+                if (resp == "success"){
+                    Console.WriteLine("Cliente Atualizado");
+                } else {
+                    Console.WriteLine("ERRO na atualização de Cliente");
+                }
+                
+            } else {
+                string resp = database.insert(this.name_table , new Dictionary<String, object>{
+                    { "nome", this.nome }, { "email", this.email },
+                    { "fone", this.fone }, { "endereco", this.endereco },
+                });
+
+                if (resp == "success"){
+                    Console.WriteLine("Cliente cadastrado");
+                } else {
+                    Console.WriteLine("ERRO no cadastro do Cliente");
+                }
+            } 
         }
 
         public void get(int id){
             cnx_BD database = new cnx_BD();
-            database.get(id, name_table);
+            
+            Dictionary<string, string> c = database.get(id, name_table);
+            try
+            {
+                this.id = int.Parse(c["id"]);
+                this.nome = c["nome"];
+                this.email = c["email"];
+                this.endereco = c["endereco"];
+                this.fone = c["fone"];                
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+
+        }
+        public void delete(){
+            cnx_BD database = new cnx_BD();
+            
+            string resp = database.delete(this.name_table ,this.id);
+            
+            if (resp == "success"){
+                Console.WriteLine("Cliente deletado");
+            } else {
+                Console.WriteLine("ERRO no exclusão do Cliente");
+            }
         }
     }
 }

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using sitesite.DAL;
 using sitesite.objetos;
 
 namespace sitesite.Pages.Clientes
@@ -23,7 +22,6 @@ namespace sitesite.Pages.Clientes
             _logger = logger;
         }
         
-        public static cnx_BD db = new cnx_BD(); 
         public void OnGet()
         {
         }
@@ -35,8 +33,6 @@ namespace sitesite.Pages.Clientes
             cliente.Fone = Request.Form["phone"];
             cliente.Endereco = Request.Form["adress"];
             cliente.save();
-            //string Message = db.insertCliente(cliente);
-            //Console.WriteLine(Message);
             return Redirect("/Clientes");
         }   
     }
