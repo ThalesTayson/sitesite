@@ -6,37 +6,45 @@
     <title>@ViewData["Title"] - sitesite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" >
     <link rel="stylesheet" href="~/sitesite.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="toolBar">
-            <a href="/" style="display: inline; margin-left: 0; width: 100px; height: 30px; vertical-align: middle;" href="#">
-                <img src="~/img/imgN.png">
-                nicepage
-            </a>
-            <div style="display: inline; margin-left: calc(50% - 175px); height: 30px; width: 150px;">
-                <a href="/Clientes"><img src="~/img/img1.png"></a>
-                <a href="#"><img src="~/img/img2.png"></a>
-                <a href="#"><img src="~/img/img3.png"></a>
-                <a href="#"><img src="~/img/img4.png"></a>
-                <a href="#"><img src="~/img/img5.png"></a>
-            </div>
-            <div style="display: inline;margin-left: calc(50% - 30px); width: 30px;height: 30px; font-family: sans-serif; font-weight: 700;">
-                <span style="cursor: pointer;">&times;</span>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">sitesite</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Clientes/index">Clientes</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
-        <div class="cabecalho">
-            <span style="font-family: cursive; font-weight: 500; color: darkgray">logo</span>
-            <span style="font-size: 30px;">&equiv;</span>
-        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - sitesite - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
