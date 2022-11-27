@@ -1,3 +1,8 @@
+using sitesite.init;
+
+var sql = new sql();
+sql.init();
+ 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

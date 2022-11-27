@@ -18,6 +18,7 @@ namespace sitesite.objetos
                 cli.Email = list[itemId]["email"];
                 cli.Endereco = list[itemId]["endereco"];
                 cli.Fone = list[itemId]["fone"];
+                cli.DataCreated = list[itemId]["create_at"];
                 this.Add(cli);
             }
         }
@@ -33,7 +34,7 @@ namespace sitesite.objetos
         private string? email;
         private string? fone;
         private string? endereco;
-
+        private string? dataCreated;
         public int Id 
         {
             get => this.id;
@@ -59,8 +60,11 @@ namespace sitesite.objetos
             get => this.endereco;
             set{ this.endereco = value;}
         }
-        public string Name_table {get => this.name_table;}
-
+        public string DataCreated
+        {
+            get => this.dataCreated;
+            set{ this.dataCreated = value;}
+        }
         public void save(){
             cnx_BD database = new cnx_BD();
             if (this.id != 0){
@@ -99,7 +103,8 @@ namespace sitesite.objetos
                 this.nome = c["nome"];
                 this.email = c["email"];
                 this.endereco = c["endereco"];
-                this.fone = c["fone"];                
+                this.fone = c["fone"];
+                this.dataCreated = c["create_at"];
             }
             catch (System.Exception)
             {

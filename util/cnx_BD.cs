@@ -32,10 +32,10 @@ namespace sitesite.DAL
                 }
                 cont += 1;
             }
-
+            string sql = @$"{str_field_sql}){"\r\n"}{str_value_sql});";
             SqlConnection conexao = new SqlConnection(strconn);
 
-            SqlCommand cmd = new SqlCommand(@$"{str_field_sql}){"\r\n"}{str_value_sql});", conexao);
+            SqlCommand cmd = new SqlCommand(sql, conexao);
             try
             {
                 conexao.Open();
@@ -43,9 +43,13 @@ namespace sitesite.DAL
 
                 return  $"success";
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                return $"fail";
+                Console.WriteLine(@$"
+                    sql: {sql} 
+                    fail: {e.Message.ToString()}
+                ");
+                return "fail";
             }
             finally
             {
@@ -56,8 +60,8 @@ namespace sitesite.DAL
         
         public Dictionary<string, Dictionary<string, string>> list(string name_table){
             SqlConnection conexao = new SqlConnection(strconn);
-
-            SqlCommand cmd = new SqlCommand(@$"SELECT * FROM {name_table}", conexao);
+            string sql = $"SELECT * FROM {name_table}";
+            SqlCommand cmd = new SqlCommand(sql, conexao);
 
             Dictionary<string, Dictionary<string, string>> list = new Dictionary<string, Dictionary<string, string>>();
 
@@ -79,9 +83,12 @@ namespace sitesite.DAL
                 reader.Close();
                 return list;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                Console.WriteLine("Desculpa, Ocorreu um erro inesperado");
+                Console.WriteLine(@$"
+                    sql: {sql}
+                    fail: {e.Message.ToString()}
+                ");
                 return list;
             }
             finally
@@ -92,8 +99,8 @@ namespace sitesite.DAL
         public string delete(string name_table, int id)
         {
             SqlConnection conexao = new SqlConnection(strconn);
-
-            SqlCommand cmd = new SqlCommand($"DELETE FROM {name_table} WHERE id = {id};", conexao);
+            string sql = $"DELETE FROM {name_table} WHERE id = {id};";
+            SqlCommand cmd = new SqlCommand(sql, conexao);
 
             try
             {
@@ -101,8 +108,12 @@ namespace sitesite.DAL
                 cmd.ExecuteNonQuery();
                 return $"success";
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
+                Console.WriteLine(@$"
+                    sql: {sql} 
+                    fail: {e.Message.ToString()}
+                ");
                 return "fail";
             }
             finally
@@ -113,25 +124,25 @@ namespace sitesite.DAL
         public string update(string name_table, int id, Dictionary<string, object> kwargs = null)
         {
 
-            string str_sql = @$"UPDATE {name_table}{"\r\n"}SET ";
+            string sql = @$"UPDATE {name_table}{"\r\n"}SET ";
 
             int cont = 0;
             foreach(var item in kwargs)
             {
                 if (cont > 0){
-                    str_sql += @$",{"\r\n"}{item.Key} = '{item.Value}'";
+                    sql += @$",{"\r\n"}{item.Key} = '{item.Value}'";
                     
                 } else {
-                    str_sql += @$"{item.Key} = '{item.Value}'";
+                    sql += @$"{item.Key} = '{item.Value}'";
                 }
                 cont += 1;
             }
 
-            str_sql += @$"{"\r\n"}WHERE id = {id};";
+            sql += @$"{"\r\n"}WHERE id = {id};";
 
             SqlConnection conexao = new SqlConnection(strconn);
 
-            SqlCommand cmd = new SqlCommand(str_sql, conexao);
+            SqlCommand cmd = new SqlCommand(sql, conexao);
 
             try
             {
@@ -139,8 +150,12 @@ namespace sitesite.DAL
                 cmd.ExecuteNonQuery();
                 return  $"success";
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
+                Console.WriteLine(@$"
+                    sql: {sql} 
+                    fail: {e.Message.ToString()}
+                ");
                 return "fail";
             }
             finally
@@ -152,10 +167,12 @@ namespace sitesite.DAL
         {
             SqlConnection conexao = new SqlConnection(strconn);
 
-            SqlCommand cmd = new SqlCommand(@$"
+            string sql = @$"
                 SELECT * FROM {name_table}
                 WHERE id = {id};
-            ", conexao); 
+            ";
+
+            SqlCommand cmd = new SqlCommand(sql, conexao); 
             try
             {
                 conexao.Open();
@@ -179,8 +196,12 @@ namespace sitesite.DAL
                 }
                 
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
+                Console.WriteLine(@$"
+                    sql: {sql} 
+                    fail: {e.Message.ToString()}
+                ");
                 return null;
             }
             finally
