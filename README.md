@@ -12,7 +12,7 @@
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[.NET](https://dotnet.microsoft.com/en-us/download), [SQL EXPRESS](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
+[.NET](https://dotnet.microsoft.com/en-us/download), [SQL EXPRESS](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads).
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
 ### 🎲 Rodando projeto no localhost
