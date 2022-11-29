@@ -1,8 +1,8 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using sitesite.objetos;
 using System.Collections.Generic;
-namespace sitesite.DAL
+
+namespace SQL.DAO
 {
 
     public class cnx_BD
@@ -23,14 +23,17 @@ namespace sitesite.DAL
             int cont = 0;
             foreach(var item in kwargs)
             {
-                if (cont > 0){
-                    str_field_sql += ", " + item.Key;
-                    str_value_sql += @$", '{item.Value}'";
-                } else {
-                    str_field_sql += item.Key;
-                    str_value_sql += @$"'{item.Value}'";
+                if (item.Value != null){
+                    if (cont > 0){
+                        str_field_sql += ", " + item.Key;
+                        str_value_sql += @$", '{item.Value}'";
+                    } else {
+                        str_field_sql += item.Key;
+                        str_value_sql += @$"'{item.Value}'";
+                    }
+                    cont += 1;                    
                 }
-                cont += 1;
+
             }
             string sql = @$"{str_field_sql}){"\r\n"}{str_value_sql});";
             SqlConnection conexao = new SqlConnection(strconn);
@@ -129,13 +132,15 @@ namespace sitesite.DAL
             int cont = 0;
             foreach(var item in kwargs)
             {
-                if (cont > 0){
-                    sql += @$",{"\r\n"}{item.Key} = '{item.Value}'";
-                    
-                } else {
-                    sql += @$"{item.Key} = '{item.Value}'";
+                if (item.Value != null){
+                    if (cont > 0){
+                        sql += @$",{"\r\n"}{item.Key} = '{item.Value}'";
+                        
+                    } else {
+                        sql += @$"{item.Key} = '{item.Value}'";
+                    }
+                    cont += 1;
                 }
-                cont += 1;
             }
 
             sql += @$"{"\r\n"}WHERE id = {id};";

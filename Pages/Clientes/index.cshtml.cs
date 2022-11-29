@@ -5,16 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using sitesite.DAL;
-using sitesite.objetos;
+using APP.Modelos;
 
 namespace sitesite.Pages.Clientes
 {
     public class index : PageModel
     {
         private readonly ILogger<index> _logger;
-
-        public static cnx_BD db = new cnx_BD();
         public ObjClientes clientes = new ObjClientes();
 
         public index(ILogger<index> logger)

@@ -1,6 +1,6 @@
 using Microsoft.Data.SqlClient;
 
-namespace sitesite.init
+namespace SQL.init
 {
     public class sql
     {

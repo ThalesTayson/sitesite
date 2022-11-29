@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using sitesite.objetos;
+using APP.Modelos;
 
 namespace sitesite.Pages.Clientes
 {   
